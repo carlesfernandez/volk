@@ -15,7 +15,7 @@ jobs:
         pip install mako six
     - name: configure
       shell: powershell
-      run: cd build; cmake -G "Visual Studio 16 2019" ..
+      run: mkdir build; cd build; cmake -G "Visual Studio 16 2019" ..
     - name: build
       run: cmake --build build --config Release
     - name: test
@@ -30,7 +30,7 @@ jobs:
     - name: install-dependencies
       run: sudo apt-get install build-essential python3-mako python3-six cmake
     - name: configure
-      run: cd build && cmake ..
+      run: mkdir build && cd build && cmake ..
     - name: build
       run: cd build && make -j2
     - name: install
@@ -52,18 +52,3 @@ jobs:
     - name: test
       run: cd build && ctest -C Release
 
-
-  volk-macos-xcode:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: install-dependencies
-      run: pip3 install mako && pip3 install six
-    - name: configure
-      run: mkdir build && cd build && cmake -GXcode ..
-    - name: build
-      run: cd build && xcodebuild -configuration Release
-    - name: install
-      run: cd build && sudo xcodebuild -configuration Release -target install
-    - name: test
-      run: cd build && ctest -C Release
