@@ -36,7 +36,7 @@ jobs:
     - name: install
       run: cd build && sudo make install && sudo ldconfig
     - name: test
-      run: volk_gnsssdr_profile
+      run: volk_profile
 
 
   volk-macos:
